@@ -1,0 +1,5 @@
+name: yFormBuilder
+main: ru.yarka.formbuilder.Loader
+api: "1.0.8"
+version: "0.1.0"
+author: YarkaDev
