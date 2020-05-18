@@ -4,7 +4,6 @@ import cn.nukkit.Player;
 import cn.nukkit.form.element.ElementButton;
 import cn.nukkit.form.response.FormResponseSimple;
 import cn.nukkit.form.window.FormWindowSimple;
-import ru.yarka.formbuilder.exception.NullFormHandlerException;
 import java.util.List;
 import java.util.function.BiConsumer;
 
@@ -19,7 +18,7 @@ public class SimpleForm extends FormWindowSimple {
         this.exitHandler = exitHandler;
     }
 
-    public void handle(Player player, FormResponseSimple response) throws NullFormHandlerException {
+    public void handle(Player player, FormResponseSimple response) {
         if(response == null) {
             if(exitHandler != null) {
                 exitHandler.accept(player, response);
