@@ -2,6 +2,7 @@ package ru.yarka.formbuilder.form.builder;
 
 import cn.nukkit.Player;
 import cn.nukkit.form.response.FormResponseModal;
+import cn.nukkit.form.response.FormResponseSimple;
 import ru.yarka.formbuilder.form.ModalForm;
 import java.util.function.BiConsumer;
 
@@ -12,6 +13,7 @@ public class ModalFormBuilder {
     private String trueButton = "";
     private String falseButton = "";
     private BiConsumer<Player, FormResponseModal> handler = null;
+    private BiConsumer<Player, FormResponseModal> exitHandler = null;
 
     private ModalFormBuilder() {
     }
@@ -39,12 +41,17 @@ public class ModalFormBuilder {
         return this;
     }
 
-    public ModalFormBuilder addHandler(BiConsumer<Player, FormResponseModal> handler) {
+    public ModalFormBuilder setHandler(BiConsumer<Player, FormResponseModal> handler) {
         this.handler = handler;
         return this;
     }
 
+    public ModalFormBuilder setCloseHandler(BiConsumer<Player, FormResponseModal> closeHandler) {
+        this.exitHandler = closeHandler;
+        return this;
+    }
+
     public ModalForm build() {
-        return new ModalForm(handler, title, text, trueButton, falseButton);
+        return new ModalForm(handler, exitHandler, title, text, trueButton, falseButton);
     }
 }

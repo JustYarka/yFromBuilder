@@ -11,15 +11,23 @@ import java.util.function.BiConsumer;
 public class SimpleForm extends FormWindowSimple {
 
     private BiConsumer<Player, FormResponseSimple> handler;
+    private BiConsumer<Player, FormResponseSimple> exitHandler;
 
-    public SimpleForm(BiConsumer<Player, FormResponseSimple> handler, String title, String content, List<ElementButton> buttons) {
+    public SimpleForm(BiConsumer<Player, FormResponseSimple> handler, BiConsumer<Player, FormResponseSimple> exitHandler, String title, String content, List<ElementButton> buttons) {
         super(title, content, buttons);
         this.handler = handler;
+        this.exitHandler = exitHandler;
     }
 
     public void handle(Player player, FormResponseSimple response) throws NullFormHandlerException {
-        if(handler == null) return;
-
-        handler.accept(player, response);
+        if(response == null) {
+            if(exitHandler != null) {
+                exitHandler.accept(player, response);
+            }
+        } else {
+            if(handler != null) {
+                handler.accept(player, response);
+            }
+        }
     }
 }

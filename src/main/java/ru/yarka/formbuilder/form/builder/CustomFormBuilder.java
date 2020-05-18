@@ -3,6 +3,7 @@ package ru.yarka.formbuilder.form.builder;
 import cn.nukkit.Player;
 import cn.nukkit.form.element.*;
 import cn.nukkit.form.response.FormResponseCustom;
+import cn.nukkit.form.response.FormResponseModal;
 import ru.yarka.formbuilder.form.CustomForm;
 import java.util.ArrayList;
 import java.util.List;
@@ -12,6 +13,7 @@ public class CustomFormBuilder {
 
     private String title = "";
     private BiConsumer<Player, FormResponseCustom> handler = null;
+    private BiConsumer<Player, FormResponseCustom> exitHandler = null;
     private List<Element> elements = new ArrayList<>();
 
     private CustomFormBuilder() {
@@ -25,13 +27,18 @@ public class CustomFormBuilder {
         return new CustomFormBuilder(title);
     }
 
-    public CustomFormBuilder addHandler(BiConsumer<Player, FormResponseCustom> handler) {
+    public CustomFormBuilder setHandler(BiConsumer<Player, FormResponseCustom> handler) {
         this.handler = handler;
         return this;
     }
 
+    public CustomFormBuilder setCloseHandler(BiConsumer<Player, FormResponseCustom> closeHandler) {
+        this.exitHandler = closeHandler;
+        return this;
+    }
+
     public CustomForm build() {
-        return new CustomForm(handler, title, elements);
+        return new CustomForm(handler, exitHandler, title, elements);
     }
 
     public CustomFormBuilder addSlider(ElementSlider element) {

@@ -14,6 +14,7 @@ public class SimpleFormBuilder {
     private String text = "";
     private List<ElementButton> buttons = new ArrayList<>();
     private BiConsumer<Player, FormResponseSimple> handler = null;
+    private BiConsumer<Player, FormResponseSimple> exitHandler = null;
 
     private SimpleFormBuilder() {
     }
@@ -42,11 +43,16 @@ public class SimpleFormBuilder {
     }
 
     public SimpleForm build() {
-        return new SimpleForm(handler, title, text, buttons);
+        return new SimpleForm(handler, exitHandler, title, text, buttons);
     }
 
-    public SimpleFormBuilder addHandler(BiConsumer<Player, FormResponseSimple> handler) {
+    public SimpleFormBuilder setHandler(BiConsumer<Player, FormResponseSimple> handler) {
         this.handler = handler;
+        return this;
+    }
+
+    public SimpleFormBuilder setCloseHandler(BiConsumer<Player, FormResponseSimple> closeHandler) {
+        this.exitHandler = closeHandler;
         return this;
     }
 }
