@@ -3,8 +3,6 @@ package ru.yarka.formbuilder.form;
 import cn.nukkit.Player;
 import cn.nukkit.form.response.FormResponseModal;
 import cn.nukkit.form.window.FormWindowModal;
-import ru.yarka.formbuilder.exception.NullFormHandlerException;
-
 import java.util.function.BiConsumer;
 
 public class ModalForm extends FormWindowModal {
@@ -18,7 +16,7 @@ public class ModalForm extends FormWindowModal {
         this.exitHandler = exitHandler;
     }
 
-    public void handle(Player player, FormResponseModal response) throws NullFormHandlerException {
+    public void handle(Player player, FormResponseModal response) {
         if(response == null) {
             if(exitHandler != null) {
                 exitHandler.accept(player, response);
