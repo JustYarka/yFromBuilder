@@ -12,9 +12,13 @@ mvn package
 SimpleForm form = SimpleFormBuilder.create("title")
 .addText("Hello world!")
 .addButton(new ElementButton("Button"))
-.addHandler((viewer, formResponse) -> {
-    if(formResponse != null) viewer.sendMessage("Clicked...");
-}).build();
+.setHandler((viewer, formResponse) -> {
+    viewer.sendMessage("Clicked...");
+})
+.setCloseHandler((viewer, formResponse) -> {
+    viewer.sendMessage("Form closed");
+})
+.build();
 player.showFormWindow(form);
 ```
 ## ModalForm
@@ -23,9 +27,13 @@ ModalForm form = ModalFormBuilder.create("title")
 .addText("Hello world!")
 .addTrueButton("Enter")
 .addFalseButton("Back")
-.addHandler((viewer, formResponse) -> {
-    if(formResponse != null) viewer.sendMessage(formResponse.getClickedButtonId() == 0 ? "false" : "true");
-}).build();
+.setHandler((viewer, formResponse) -> {
+    viewer.sendMessage(formResponse.getClickedButtonId() == 0 ? "false" : "true");
+})
+.setCloseHandler((viewer, formResponse) -> {
+    viewer.sendMessage("Form closed");
+})
+.build();
 player.showFormWindow(form);
 ```
 ## CustomForm
@@ -33,8 +41,12 @@ player.showFormWindow(form);
 CustomForm form = CustomFormBuilder.create("title")
 .addLabel("Let`s talk any more about you...")
 .addInput(new ElementInput("", "Enter your nickname"))
-.addHandler((viewer, formResponse) -> {
-    if(formResponse != null) viewer.sendMessage("Your name: " + String.valueOf(formResponse.getResponse(1)));
-}).build();
+.setHandler((viewer, formResponse) -> {
+    viewer.sendMessage("Your name: " + String.valueOf(formResponse.getResponse(1)));
+})
+.setCloseHandler((viewer, formResponse) -> {
+    viewer.sendMessage("Form closed");
+})
+.build();
 player.showFormWindow(form);
 ```
