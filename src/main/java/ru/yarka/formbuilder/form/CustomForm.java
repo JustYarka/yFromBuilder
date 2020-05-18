@@ -4,7 +4,6 @@ import cn.nukkit.Player;
 import cn.nukkit.form.element.Element;
 import cn.nukkit.form.response.FormResponseCustom;
 import cn.nukkit.form.window.FormWindowCustom;
-import ru.yarka.formbuilder.exception.NullFormHandlerException;
 import java.util.List;
 import java.util.function.BiConsumer;
 
@@ -19,7 +18,7 @@ public class CustomForm extends FormWindowCustom {
         this.exitHandler = exitHandler;
     }
 
-    public void handle(Player player, FormResponseCustom response) throws NullFormHandlerException {
+    public void handle(Player player, FormResponseCustom response) {
         if(response == null) {
             if(exitHandler != null) {
                 exitHandler.accept(player, response);
