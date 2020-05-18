@@ -6,7 +6,6 @@ import cn.nukkit.event.player.PlayerFormRespondedEvent;
 import cn.nukkit.form.response.FormResponseCustom;
 import cn.nukkit.form.response.FormResponseModal;
 import cn.nukkit.form.response.FormResponseSimple;
-import ru.yarka.formbuilder.exception.NullFormHandlerException;
 import ru.yarka.formbuilder.form.CustomForm;
 import ru.yarka.formbuilder.form.ModalForm;
 import ru.yarka.formbuilder.form.SimpleForm;
@@ -14,7 +13,7 @@ import ru.yarka.formbuilder.form.SimpleForm;
 public class Handler implements Listener {
 
     @EventHandler
-    public void handleFormResponse(PlayerFormRespondedEvent event) throws NullFormHandlerException {
+    public void handleFormResponse(PlayerFormRespondedEvent event) {
         if(event.getWindow() instanceof SimpleForm) {
             SimpleForm form = (SimpleForm) event.getWindow();
             form.handle(event.getPlayer(), (FormResponseSimple) event.getResponse());
